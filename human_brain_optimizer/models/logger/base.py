@@ -30,3 +30,7 @@ class BaseLogger(ABC):
     @abstractmethod
     def save(self) -> None:
         pass
+
+    @abstractmethod
+    def merge_logger(self, other_logger) -> None:
+        pass

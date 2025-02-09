@@ -13,5 +13,6 @@ class Experiment:
             life = Life()
             life.run()
             self.logger.receive_message('lifespan', life.human.age)
+            self.logger.merge_logger('action', life.action_logger)
 
         self.logger.save()

@@ -71,3 +71,6 @@ class LifespanLogger(BaseLogger):
 
     def load(self) -> dict:
         return json.load(open(self.file_path('raw.json')))
+
+    def merge_logger(self, other_logger) -> None:
+        raise NotImplementedError

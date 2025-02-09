@@ -29,6 +29,7 @@ class Human:
         action = self.choose_action()
         action.use(self)
         self.turn_consequence()
+        return action.ACTION_NAME
 
     def sanitize(self):
         self.food_level = min(self.food_level, self.MAXIMUM_INDICATOR_LEVEL)
