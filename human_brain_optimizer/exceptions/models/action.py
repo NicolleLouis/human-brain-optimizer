@@ -1,0 +1,2 @@
+class ActionMissingImplementation(Exception):
+    pass

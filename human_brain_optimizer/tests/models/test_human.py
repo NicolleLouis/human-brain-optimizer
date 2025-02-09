@@ -44,3 +44,20 @@ def test_death_probability_single_defection(human):
             death_count += 1
         human.dead = False
     assert 150 > death_count > 50
+
+def test_sanitize_no_change(human):
+    valid_value = 10
+    human.food_level = valid_value
+    human.energy_level = valid_value
+    human.sanitize()
+    assert human.food_level == valid_value
+    assert human.energy_level == valid_value
+
+
+def test_sanitize_change(human):
+    invalid_value = 30
+    human.food_level = invalid_value
+    human.energy_level = invalid_value
+    human.sanitize()
+    assert human.food_level == human.MAXIMUM_INDICATOR_LEVEL
+    assert human.energy_level == human.MAXIMUM_INDICATOR_LEVEL

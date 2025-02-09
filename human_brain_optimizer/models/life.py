@@ -7,4 +7,4 @@ class Life:
 
     def run(self):
         while self.human.dead is False:
-            self.human.turn_consequence()
+            self.human.turn()

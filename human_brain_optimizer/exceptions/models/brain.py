@@ -1,0 +1,2 @@
+class UnknownActionNameException(Exception):
+    pass
