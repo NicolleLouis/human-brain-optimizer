@@ -1,7 +1,8 @@
 import random
 
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
-from human_brain_optimizer.models.brains.main import MainBrain
+from human_brain_optimizer.models.brains.general.base import Brain
+from human_brain_optimizer.models.brains.general.random import RandomBrain
 
 
 class Human:
@@ -17,7 +18,7 @@ class Human:
         self.dead = False
         self.last_action = None
         self.inventory = []
-        self.brain = MainBrain()
+        self.brain = RandomBrain
         self.actions = self.INTRINSIC_ACTIONS.copy()
 
     def choose_action(self):
@@ -40,11 +41,18 @@ class Human:
         self.death_check()
 
     def death_check(self):
-        death_probability = 0
+        base_death_probability = 0
         if self.energy_level <= 0 and self.food_level <= 0:
-            death_probability = 50
+            base_death_probability = 50
         elif self.energy_level <= 0 or self.food_level <= 0:
-            death_probability = 10
+            base_death_probability = 10
+
+        death_probability = base_death_probability
+        if self.energy_level <= 0:
+            death_probability += -self.energy_level
+        if self.food_level <= 0:
+            death_probability += -self.food_level
+
         if random.randint(0, 100) < death_probability:
             self.dead = True
 

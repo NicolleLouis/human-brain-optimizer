@@ -4,6 +4,7 @@ from human_brain_optimizer.models.actions.base import BaseAction
 
 
 class BaseBrain(ABC):
+    @staticmethod
     @abstractmethod
-    def finesse(self, action: BaseAction) -> int:
+    def finesse(action: BaseAction) -> int:
         pass
