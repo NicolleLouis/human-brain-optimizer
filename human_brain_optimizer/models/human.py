@@ -17,7 +17,7 @@ class Human:
         self.dead = False
         self.last_action = None
         self.inventory = []
-        self.brain = RandomBrain
+        self.brain = RandomBrain()
         self.actions = self.INTRINSIC_ACTIONS.copy()
 
     def choose_action(self):
@@ -63,4 +63,5 @@ class Human:
         self.inventory.remove(item)
 
     def set_external_actions(self, external_actions):
-        self.actions = self.INTRINSIC_ACTIONS.copy().extend(external_actions)
+        self.actions = self.INTRINSIC_ACTIONS.copy()
+        self.actions.extend(external_actions)

@@ -1,5 +1,7 @@
 import pytest
 
+from unittest.mock import MagicMock
+
 from human_brain_optimizer.models.human import Human
 
 
@@ -61,3 +63,29 @@ def test_sanitize_change(human):
     human.sanitize()
     assert human.food_level == human.MAXIMUM_INDICATOR_LEVEL
     assert human.energy_level == human.MAXIMUM_INDICATOR_LEVEL
+
+def test_choose_action(human):
+    human.actions = ["best_action", "action_1", "action_2"]
+    human.brain.finesse = MagicMock(
+        side_effect=lambda action: {"best_action": 10, "action_1": 5, "action_2": 1}[action]
+    )
+    assert human.choose_action() == "best_action"
+
+def test_turn(human):
+    human.turn()
+    assert human.age == 1
+
+def test_add_item(human):
+    assert len(human.inventory) == 0
+    human.add_item(1)
+    assert len(human.inventory) == 1
+
+def test_remove_item(human):
+    human.inventory = [1]
+    human.remove_item(1)
+    assert len(human.inventory) == 0
+
+def test_set_external_actions(human):
+    assert len(human.actions) == len(human.INTRINSIC_ACTIONS)
+    human.set_external_actions(["action_1"])
+    assert len(human.actions) == len(human.INTRINSIC_ACTIONS) + 1

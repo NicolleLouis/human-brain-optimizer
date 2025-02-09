@@ -64,8 +64,9 @@ class LifespanLogger(BaseLogger):
         fig_bar.write_image(self.file_path(f"{chart_name}.png"))
 
     def save_mathematical_analysis(self):
-        analysis = {}
-        analysis['average_lifespan'] = (self.df['age'] * self.df['death_count']).sum() / self.df['death_count'].sum()
+        analysis = {
+            'average_lifespan': (self.df['age'] * self.df['death_count']).sum() / self.df['death_count'].sum()
+        }
 
         json.dump(analysis, open(self.file_path('math.json'), 'w'))
 
