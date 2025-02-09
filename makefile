@@ -1,2 +1,2 @@
 test:
-	poetry run pytest
+	poetry run pytest --cov --cov-report=html:coverage

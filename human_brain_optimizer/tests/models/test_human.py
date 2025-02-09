@@ -19,6 +19,7 @@ def test_turn_consequence(human):
     human.turn_consequence()
     assert human.food_level == Human.MAXIMUM_INDICATOR_LEVEL - 1
     assert human.energy_level == Human.MAXIMUM_INDICATOR_LEVEL - 1
+    assert human.age == 1
 
 
 def test_death_probability_both_defection(human):

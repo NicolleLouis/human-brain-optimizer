@@ -13,6 +13,7 @@ class Human:
     def turn_consequence(self):
         self.food_level -= 1
         self.energy_level -= 1
+        self.age += 1
         self.death_check()
 
     def death_check(self):
