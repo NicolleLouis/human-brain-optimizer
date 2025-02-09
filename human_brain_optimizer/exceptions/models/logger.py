@@ -3,3 +3,6 @@ class UnknownLoggerNameException(Exception):
 
 class LoggerMissingImplementationException(Exception):
     pass
+
+class LifespanLoggerMessageNotRecognizedException(Exception):
+    pass

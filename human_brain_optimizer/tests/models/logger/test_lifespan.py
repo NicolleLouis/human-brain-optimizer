@@ -8,23 +8,23 @@ from human_brain_optimizer.models.logger.lifespan import LifespanLogger
 @pytest.fixture
 def lifespan_logger():
     logger = LifespanLogger()
-    logger.result_dict = {1: 10, 2: 20, 3: 30}
+    logger.lifespan_dict = {1: 10, 2: 20, 3: 30}
     return logger
 
 def test_receive_lifespan_non_existent():
     logger = LifespanLogger()
-    logger.log(10)
-    assert logger.result_dict[10] == 1
+    logger.log('lifespan', 10)
+    assert logger.lifespan_dict[10] == 1
 
 def test_receive_lifespan_existent_key():
     logger = LifespanLogger()
-    logger.result_dict[1] = 100
-    logger.log(1)
-    assert logger.result_dict[1] == 101
+    logger.lifespan_dict[1] = 100
+    logger.log('lifespan', 1)
+    assert logger.lifespan_dict[1] == 101
 
 def test_enrich_dataframe(lifespan_logger):
     lifespan_logger.enrich_dataframe()
-    df = lifespan_logger.df
+    df = lifespan_logger.lifespan_df
 
     assert df is not None
     assert list(df['age']) == [1, 2, 3]

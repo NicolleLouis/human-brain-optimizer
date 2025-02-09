@@ -80,6 +80,12 @@ def test_add_item(human):
     human.add_item(1)
     assert len(human.inventory) == 1
 
+def test_add_item_fail_case(human):
+    human.inventory = [1] * human.MAXIMUM_INVENTORY_SIZE
+    assert len(human.inventory) == human.MAXIMUM_INVENTORY_SIZE
+    human.add_item(1)
+    assert len(human.inventory) == human.MAXIMUM_INVENTORY_SIZE
+
 def test_remove_item(human):
     human.inventory = [1]
     human.remove_item(1)

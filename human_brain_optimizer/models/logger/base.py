@@ -16,7 +16,7 @@ class BaseLogger(ABC):
             raise LoggerMissingImplementationException
 
     @abstractmethod
-    def log(self, message) -> None:
+    def log(self, **kwargs) -> None:
         pass
 
     def file_path(self, filename = "raw.json"):

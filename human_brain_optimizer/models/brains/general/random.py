@@ -4,5 +4,7 @@ from human_brain_optimizer.models.brains.specific.random import RandomSpecificBr
 
 class RandomBrain(Brain):
     CONFIG = {
-        'sleep': RandomSpecificBrain
+        'sleep': RandomSpecificBrain,
+        'eat': RandomSpecificBrain,
+        'hunt': RandomSpecificBrain,
     }

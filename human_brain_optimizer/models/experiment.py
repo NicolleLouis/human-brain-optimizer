@@ -12,7 +12,16 @@ class Experiment:
         for _ in range(self.LIFE_NUMBER):
             life = Life()
             life.run()
-            self.logger.receive_message('lifespan', life.human.age)
+            self.logger.receive_message(
+                'lifespan',
+                log_type='lifespan',
+                log_value=life.human.age
+            )
+            self.logger.receive_message(
+                'lifespan',
+                log_type='death_cause',
+                log_value=life.death_cause()
+            )
             self.logger.merge_logger('action', life.action_logger)
 
         self.logger.save()

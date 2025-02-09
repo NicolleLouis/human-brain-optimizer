@@ -1,13 +1,16 @@
 import random
 
+from human_brain_optimizer.models.actions.intrinsic.eat import Eat
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
 from human_brain_optimizer.models.brains.general.random import RandomBrain
 
 
 class Human:
     MAXIMUM_INDICATOR_LEVEL = 24
+    MAXIMUM_INVENTORY_SIZE = 10
     INTRINSIC_ACTIONS = [
         Sleep,
+        Eat,
     ]
 
     def __init__(self):
@@ -53,11 +56,12 @@ class Human:
         if self.food_level <= 0:
             death_probability += -self.food_level
 
-        if random.randint(0, 100) < death_probability:
+        if random.randint(0, 99) < death_probability:
             self.dead = True
 
     def add_item(self, item):
-        self.inventory.append(item)
+        if len(self.inventory) < self.MAXIMUM_INVENTORY_SIZE:
+            self.inventory.append(item)
 
     def remove_item(self, item):
         self.inventory.remove(item)

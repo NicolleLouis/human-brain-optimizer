@@ -11,9 +11,9 @@ class MainLogger:
             'action': ActionLogger(),
         }
 
-    def receive_message(self, logger_name: str, message) -> None:
+    def receive_message(self, logger_name: str, **kwargs) -> None:
         logger = self.get_logger(logger_name)
-        logger.log(message)
+        logger.log(**kwargs)
 
     def merge_logger(self, logger_name: str, other_logger: BaseLogger) -> None:
         logger = self.get_logger(logger_name)
