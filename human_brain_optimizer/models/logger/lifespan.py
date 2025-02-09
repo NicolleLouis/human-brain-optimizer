@@ -63,11 +63,18 @@ class LifespanLogger(BaseLogger):
         fig_bar.write_html(self.file_path(f"{chart_name}.html"))
         fig_bar.write_image(self.file_path(f"{chart_name}.png"))
 
+    def save_mathematical_analysis(self):
+        analysis = {}
+        analysis['average_lifespan'] = (self.df['age'] * self.df['death_count']).sum() / self.df['death_count'].sum()
+
+        json.dump(analysis, open(self.file_path('math.json'), 'w'))
+
     def save(self) -> None:
         self.save_raw()
         self.enrich_dataframe()
         self.save_cumulative_death_chart()
         self.save_probability_death_chart()
+        self.save_mathematical_analysis()
 
     def load(self) -> dict:
         return json.load(open(self.file_path('raw.json')))

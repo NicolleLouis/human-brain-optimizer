@@ -29,7 +29,7 @@ def test_second_sleep(human):
     assert human.last_action == Sleep.ACTION_NAME
 
 def test_excess_sleep(human):
-    human.energy_level = 25
+    human.energy_level = Human.MAXIMUM_INDICATOR_LEVEL + 1
     Sleep.use(human)
-    assert human.energy_level == 25
+    assert human.energy_level == Human.MAXIMUM_INDICATOR_LEVEL
     assert human.last_action == Sleep.ACTION_NAME

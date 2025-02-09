@@ -1,12 +1,11 @@
 import random
 
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
-from human_brain_optimizer.models.brains.general.base import Brain
 from human_brain_optimizer.models.brains.general.random import RandomBrain
 
 
 class Human:
-    MAXIMUM_INDICATOR_LEVEL = 25
+    MAXIMUM_INDICATOR_LEVEL = 24
     INTRINSIC_ACTIONS = [
         Sleep,
     ]
