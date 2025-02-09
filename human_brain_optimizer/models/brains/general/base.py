@@ -7,11 +7,15 @@ from human_brain_optimizer.models.actions.base import BaseAction
 class Brain(ABC):
     CONFIG = None
 
-    @classmethod
-    def finesse(cls, action: BaseAction) -> int:
+    def __init__(self, human):
+        self.config = {}
+        for action_name, brain_class in self.CONFIG.items():
+            self.config[action_name] = brain_class(human)
+
+    def finesse(self, action: BaseAction) -> int:
         action_name = action.ACTION_NAME
-        if action_name not in cls.CONFIG:
+        if action_name not in self.CONFIG:
             raise UnknownActionNameException(action_name)
 
-        brain = cls.CONFIG[action_name]
+        brain = self.config[action_name]
         return brain.finesse(action)

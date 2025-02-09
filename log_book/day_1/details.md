@@ -16,7 +16,7 @@ its energy entirely.
 The brain for now is completely random (Equivalent to no brain).
 
 They only know 1 action which is Sleeping, so all humans spend there all time sleeping. Here is there current success:
-![Cumulative Deaths Chart](cumulative_deaths_chart_1.png)
+![Cumulative Deaths Chart 1](cumulative_deaths_chart_1.png)
 
 Average lifespan: **29 hours**
 
@@ -35,7 +35,7 @@ The brain is still completely and desperately empty so all actions are taken ran
 
 Let's look at the results:
 
-![Cumulative Deaths Chart](cumulative_deaths_chart_2.png)
+![Cumulative Deaths Chart 2](cumulative_deaths_chart_2.png)
 
 Average lifespan: **36.5 hours**
 
@@ -61,11 +61,40 @@ The food is still the issue strangely. My explanation is that, since hunting and
 On the other hand sleeping only need to happen from time to time consecutively, and since there is only 3 actions for
 now. It happens relatively often.
 
-Next steps: replace this useless brain and start the training. I think I will add the knowledge of eating is useless
-without food. Once this is done, I will start the training process. As a first iteration,
+---
+
+## Step 3
+
+Just to make it a little bit less dumb, I set the finesse value of Eating to 0 if you don't have available food.
+
+I was thinking it would decrease the chance of hunger death and increase the energy death. I was also thinking it would
+increase the life expectancy.
+
+Once again I was surprised by the results. It indeed increased the life expectancy, up to **45 days**.
+
+However, the death cause is even more biased toward famine death:
+
+\{
+"food": 9258,
+"energy": 474,
+"multiple": 268,
+\}
+
+After thinking on it my understanding is that it's now not eating for nothing, which means when he doesn't have food,
+and so when this happens it has 50% to sleep, which is great to trigger sleep streaks. So it actually improve a lot
+the sleep of our humans. The Hunt is actually taking less advantages of this, and so it's less fatal now than previously
+but people live longer, and so they're relatively dying more of famine.
+
+---
+
+Next steps: replace this useless brain and start the training. Once this is done, I will start the training process.
+As a first iteration,
 
 - Hunt will be a fixed value
 - Eat will be a fixed ratio * missing food.
 - Sleep will be a fixed ratio * missing energy.
 
-And I will train it to find nice ratios/values. We'll see where this lead our human performance. 
+And I will train it to find nice ratios/values. We'll see where this lead our human performance.
+
+I will also check the theoretical day planning of my humans to see if it's coherent (Noticed for example an issue with
+the hunt probability, I forgot to take in account the time needed for sleeping or eating in my computations)

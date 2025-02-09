@@ -2,7 +2,7 @@ import random
 
 from human_brain_optimizer.models.actions.intrinsic.eat import Eat
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
-from human_brain_optimizer.models.brains.general.random import RandomBrain
+from human_brain_optimizer.models.brains.general.v1 import BrainV1
 
 
 class Human:
@@ -20,7 +20,7 @@ class Human:
         self.dead = False
         self.last_action = None
         self.inventory = []
-        self.brain = RandomBrain()
+        self.brain = BrainV1(self)
         self.actions = self.INTRINSIC_ACTIONS.copy()
 
     def choose_action(self):
