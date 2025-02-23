@@ -2,6 +2,7 @@ from abc import ABC
 
 from human_brain_optimizer.exceptions.models.brain import UnknownActionNameException
 from human_brain_optimizer.models.actions.base import BaseAction
+from human_brain_optimizer.models.data.brain_config import BrainConfig
 
 
 class Brain(ABC):
@@ -12,10 +13,26 @@ class Brain(ABC):
         for action_name, brain_class in self.CONFIG.items():
             self.config[action_name] = brain_class(human)
 
-    def finesse(self, action: BaseAction) -> int:
-        action_name = action.ACTION_NAME
+    def get_brain(self, action: BaseAction = None, action_name: str = None):
+        if action is not None:
+            action_name = action.ACTION_NAME
+
         if action_name not in self.CONFIG:
             raise UnknownActionNameException(action_name)
 
-        brain = self.config[action_name]
-        return brain.finesse(action)
+        return self.config[action_name]
+
+    def finesse(self, action: BaseAction) -> int:
+        brain = self.get_brain(action = action)
+        return brain.score(action)
+
+    def set_configs(self, brain_config: [BrainConfig]):
+        for config in brain_config:
+            self.set_config(config)
+
+    def set_config(self, config: BrainConfig):
+        brain = self.get_brain(action_name = config.brain_name)
+        brain.set_config(
+            config_type=config.config_name,
+            config_value=config.value
+        )

@@ -70,14 +70,14 @@ Just to make it a little bit less dumb, I set the finesse value of Eating to 0 i
 I was thinking it would decrease the chance of hunger death and increase the energy death. I was also thinking it would
 increase the life expectancy.
 
-Once again I was surprised by the results. It indeed increased the life expectancy, up to **45 days**.
+Once again I was surprised by the results. It indeed increased the life expectancy, up to **45 hours**.
 
 However, the death cause is even more biased toward famine death:
 
 \{
 "food": 9258,
 "energy": 474,
-"multiple": 268,
+"multiple": 268
 \}
 
 After thinking on it my understanding is that it's now not eating for nothing, which means when he doesn't have food,

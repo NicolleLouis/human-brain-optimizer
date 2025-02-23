@@ -1,5 +1,6 @@
 from human_brain_optimizer.exceptions.life import HumanNotDead, UnexpectedDeath
 from human_brain_optimizer.models.actions.extrinsic.hunt import Hunt
+from human_brain_optimizer.models.data.brain_config import BrainConfig
 from human_brain_optimizer.models.human import Human
 from human_brain_optimizer.models.logger.action import ActionLogger
 
@@ -9,8 +10,8 @@ class Life:
         Hunt,
     ]
 
-    def __init__(self):
-        self.human = Human()
+    def __init__(self, brain_config: [BrainConfig] = None):
+        self.human = Human(brain_config)
         self.add_extrinsic_actions()
         self.action_logger = ActionLogger()
 

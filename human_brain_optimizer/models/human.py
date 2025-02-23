@@ -3,6 +3,7 @@ import random
 from human_brain_optimizer.models.actions.intrinsic.eat import Eat
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
 from human_brain_optimizer.models.brains.general.v1 import BrainV1
+from human_brain_optimizer.models.data.brain_config import BrainConfig
 
 
 class Human:
@@ -12,8 +13,9 @@ class Human:
         Sleep,
         Eat,
     ]
+    AGE_LIMIT = 1000
 
-    def __init__(self):
+    def __init__(self, brain_config: [BrainConfig] = None):
         self.food_level = self.MAXIMUM_INDICATOR_LEVEL
         self.energy_level = self.MAXIMUM_INDICATOR_LEVEL
         self.age = 0
@@ -22,6 +24,8 @@ class Human:
         self.inventory = []
         self.brain = BrainV1(self)
         self.actions = self.INTRINSIC_ACTIONS.copy()
+        if brain_config is not None:
+            self.brain.set_configs(brain_config)
 
     def choose_action(self):
         best_action = max(self.actions, key=lambda action: self.brain.finesse(action))
@@ -57,6 +61,9 @@ class Human:
             death_probability += -self.food_level
 
         if random.randint(0, 99) < death_probability:
+            self.dead = True
+
+        if self.age > self.AGE_LIMIT:
             self.dead = True
 
     def add_item(self, item):

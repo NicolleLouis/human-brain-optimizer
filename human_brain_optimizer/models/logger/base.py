@@ -34,3 +34,6 @@ class BaseLogger(ABC):
     @abstractmethod
     def merge_logger(self, other_logger) -> None:
         pass
+
+    def reset(self) -> None:
+        self.__init__()

@@ -1,12 +1,12 @@
 from human_brain_optimizer.models.life import Life
-from human_brain_optimizer.models.logger.main import MainLogger
+from human_brain_optimizer.models.logger.general.base import GlobalLogger
 
 
 class Experiment:
     LIFE_NUMBER = 10000
 
     def __init__(self):
-        self.logger = MainLogger()
+        self.logger = GlobalLogger()
 
     def run(self):
         for _ in range(self.LIFE_NUMBER):
