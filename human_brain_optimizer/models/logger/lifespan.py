@@ -27,9 +27,10 @@ class LifespanLogger(BaseLogger):
 
     def add_death_cause(self, death_cause: str) -> None:
         valid_death_cause = [
-            'energy',
-            'food',
-            'multiple'
+            'Energy',
+            'Food & Energy',
+            'Food',
+            'Old age'
         ]
         if death_cause not in valid_death_cause:
             raise LifespanLoggerMessageNotRecognizedException('death_cause unknown')

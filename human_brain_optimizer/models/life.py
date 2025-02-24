@@ -28,10 +28,12 @@ class Life:
             raise HumanNotDead
 
         if self.human.energy_level <= 0 and self.human.food_level <= 0:
-            return 'multiple'
+            return 'Food & Energy'
         elif self.human.energy_level <= 0:
-            return 'energy'
+            return 'Energy'
         elif self.human.food_level <= 0:
-            return 'food'
+            return 'Food'
+        elif self.human.age > Human.AGE_LIMIT:
+            return 'Old age'
         else:
             raise UnexpectedDeath

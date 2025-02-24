@@ -26,7 +26,7 @@ class Training:
     def generate_experiment_depth(self):
         total_configuration = len(self.experiments)
         if total_configuration > 100:
-            raise 'Too Large initial set'
+            raise Exception(f"Too Large initial set: {total_configuration} cases")
 
         self.life_size = int(self.LIFE_NUMBER / total_configuration)
 
