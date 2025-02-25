@@ -11,11 +11,11 @@ class BaseBrain(ABC):
         self.human = human
 
     @abstractmethod
-    def finesse(self, action: BaseAction) -> int:
+    def finesse(self) -> int:
         pass
 
-    def score(self, action: BaseAction):
-        score = self.finesse(action)
+    def score(self):
+        score = self.finesse()
         score = min(self.MAX_FINESSE, score)
 
         # Adding some chaos to avoid deterministic behaviour

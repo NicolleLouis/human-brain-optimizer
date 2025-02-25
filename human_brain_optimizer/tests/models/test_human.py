@@ -95,3 +95,8 @@ def test_set_external_actions(human):
     assert len(human.actions) == len(human.INTRINSIC_ACTIONS)
     human.set_external_actions(["action_1"])
     assert len(human.actions) == len(human.INTRINSIC_ACTIONS) + 1
+
+def test_old_age_death(human):
+    human.age = human.AGE_LIMIT + 1
+    human.death_check()
+    assert human.dead

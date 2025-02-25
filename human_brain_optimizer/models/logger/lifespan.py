@@ -58,6 +58,18 @@ class LifespanLogger(BaseLogger):
 
         self.lifespan_df = df
 
+    def save_death_cause_chart(self):
+        chart_name = "death_cause"
+        df = pd.DataFrame(list(self.death_cause.items()), columns=["Death Cause", "Number"])
+        fig = px.pie(
+            df,
+            values="Number",
+            names="Death Cause",
+            title="Death Cause"
+        )
+        fig.write_html(self.file_path(f"{chart_name}.html"))
+        fig.write_image(self.file_path(f"{chart_name}.png"))
+
     def save_cumulative_death_chart(self):
         chart_name = "cumulative_deaths_chart"
         fig_line = px.line(
@@ -101,6 +113,7 @@ class LifespanLogger(BaseLogger):
         self.save_cumulative_death_chart()
         self.save_probability_death_chart()
         self.save_mathematical_analysis()
+        self.save_death_cause_chart()
 
     def load(self) -> dict:
         return json.load(open(self.file_path('raw.json')))

@@ -1,5 +1,8 @@
 import json
 
+import pandas as pd
+import plotly.express as px
+
 from human_brain_optimizer.models.logger.base import BaseLogger
 
 
@@ -14,6 +17,18 @@ class ActionLogger(BaseLogger):
     def log(self, action_name) -> None:
         self.action_dict.setdefault(action_name, 0)
         self.action_dict[action_name] += 1
+
+    def save_chart(self):
+        chart_name = "action_repartition"
+        df = pd.DataFrame(list(self.action_dict.items()), columns=["Action", "Number"])
+        fig = px.pie(
+            df,
+            values="Number",
+            names="Action",
+            title="Action Repartition"
+        )
+        fig.write_html(self.file_path(f"{chart_name}.html"))
+        fig.write_image(self.file_path(f"{chart_name}.png"))
 
     def save_normalized(self):
         normalized_dict = {}
@@ -30,6 +45,7 @@ class ActionLogger(BaseLogger):
     def save(self) -> None:
         self.compute_total_actions()
         self.save_normalized()
+        self.save_chart()
 
     def merge_logger(self, other_logger) -> None:
         for key, value in other_logger.action_dict.items():

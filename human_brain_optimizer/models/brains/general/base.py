@@ -24,7 +24,7 @@ class Brain(ABC):
 
     def finesse(self, action: BaseAction) -> int:
         brain = self.get_brain(action = action)
-        return brain.score(action)
+        return brain.score()
 
     def set_configs(self, brain_config: [BrainConfig]):
         for config in brain_config:

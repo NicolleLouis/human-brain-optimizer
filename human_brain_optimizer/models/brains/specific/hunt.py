@@ -1,11 +1,10 @@
 from human_brain_optimizer.exceptions.models.brain import UnknownConfigTypeException
-from human_brain_optimizer.models.actions.base import BaseAction
 from human_brain_optimizer.models.brains.specific.base import BaseBrain
 
 
-class EatBrain(BaseBrain):
-    FLAT_AMOUNT = 0
-    RATIO_AMOUNT = 25
+class HuntBrain(BaseBrain):
+    FLAT_AMOUNT = 650
+    RATIO_AMOUNT = -50
 
     def __init__(self, human):
         super().__init__(human)
@@ -13,12 +12,12 @@ class EatBrain(BaseBrain):
         self.ratio_amount = self.RATIO_AMOUNT
 
     def finesse(self) -> int:
-        if len(self.human.inventory) == 0:
+        if len(self.human.inventory) == self.human.MAXIMUM_INVENTORY_SIZE:
             return 0
-        return self.flat_amount + self.ratio_amount * self.hunger()
+        return self.flat_amount + self.ratio_amount * self.rabbit_collected()
 
-    def hunger(self):
-        return self.human.MAXIMUM_INDICATOR_LEVEL - self.human.food_level
+    def rabbit_collected(self):
+        return self.human.inventory.count('rabbit')
 
     def set_config(self, config_type: str, config_value: int):
         if config_type == 'flat_amount':

@@ -15,7 +15,7 @@ class SleepBrain(BaseBrain):
         self.ratio_amount = self.RATIO_AMOUNT
         self.already_asleep_bonus = self.ALREADY_ASLEEP_BONUS
 
-    def finesse(self, action: BaseAction) -> int:
+    def finesse(self) -> int:
         finesse = self.flat_amount + self.ratio_amount * self.sleepiness()
         if self.was_sleeping():
             finesse += self.already_asleep_bonus
