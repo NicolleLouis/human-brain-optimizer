@@ -1,6 +1,7 @@
 from abc import ABC
 
 from human_brain_optimizer.exceptions.models.logger import UnknownLoggerNameException
+from human_brain_optimizer.models.logger.ability import AbilityLogger
 from human_brain_optimizer.models.logger.action import ActionLogger
 from human_brain_optimizer.models.logger.base import BaseLogger
 from human_brain_optimizer.models.logger.inventory import InventoryLogger
@@ -9,9 +10,10 @@ from human_brain_optimizer.models.logger.lifespan import LifespanLogger
 
 class GlobalLogger(ABC):
     CONFIG = {
-            'lifespan': LifespanLogger,
+            'ability': AbilityLogger,
             'action': ActionLogger,
             'inventory': InventoryLogger,
+            'lifespan': LifespanLogger,
         }
 
     def __init__(self):

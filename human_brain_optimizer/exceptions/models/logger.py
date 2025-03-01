@@ -6,3 +6,6 @@ class LoggerMissingImplementationException(Exception):
 
 class LifespanLoggerMessageNotRecognizedException(Exception):
     pass
+
+class AbilityLoggerMessageNotRecognizedException(Exception):
+    pass
