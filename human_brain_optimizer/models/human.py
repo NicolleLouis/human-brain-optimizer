@@ -1,5 +1,6 @@
 import random
 
+from human_brain_optimizer.models.actions.base import BaseAction
 from human_brain_optimizer.models.actions.intrinsic.eat import Eat
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
 from human_brain_optimizer.models.brains.general.v1 import BrainV1
@@ -9,7 +10,7 @@ from human_brain_optimizer.models.data.brain_config import BrainConfig
 class Human:
     MAXIMUM_INDICATOR_LEVEL = 24
     MAXIMUM_INVENTORY_SIZE = 10
-    INTRINSIC_ACTIONS = [
+    INTRINSIC_ACTIONS: list[BaseAction] = [
         Sleep,
         Eat,
     ]
@@ -23,19 +24,20 @@ class Human:
         self.last_action = None
         self.inventory = []
         self.brain = BrainV1(self)
-        self.actions = self.INTRINSIC_ACTIONS.copy()
+        self.actions: list[BaseAction] = self.INTRINSIC_ACTIONS.copy()
         if brain_config is not None:
             self.brain.set_configs(brain_config)
 
-    def choose_action(self):
-        best_action = max(self.actions, key=lambda action: self.brain.finesse(action))
-        return best_action
+    def choose_action(self) -> tuple[BaseAction, int]:
+        finesse_values = {action: self.brain.finesse(action) for action in self.actions}
+        best_action = max(finesse_values, key=finesse_values.get)
+        return best_action, finesse_values[best_action]
 
     def turn(self):
-        action = self.choose_action()
+        action, finesse = self.choose_action()
         action.use(self)
         self.turn_consequence()
-        return action.ACTION_NAME
+        return action.ACTION_NAME, finesse
 
     def sanitize(self):
         self.food_level = min(self.food_level, self.MAXIMUM_INDICATOR_LEVEL)

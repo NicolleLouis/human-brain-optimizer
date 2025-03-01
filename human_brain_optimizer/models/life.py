@@ -17,8 +17,8 @@ class Life:
 
     def run(self):
         while self.human.dead is False:
-            action = self.human.turn()
-            self.action_logger.log(action)
+            action, finesse = self.human.turn()
+            self.action_logger.log(action_name=action, finesse=finesse)
 
     def add_extrinsic_actions(self):
         self.human.set_external_actions(self.BASE_EXTRINSIC_ACTIONS)
