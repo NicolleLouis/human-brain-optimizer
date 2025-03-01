@@ -3,6 +3,7 @@ from human_brain_optimizer.models.actions.extrinsic.hunt import Hunt
 from human_brain_optimizer.models.data.brain_config import BrainConfig
 from human_brain_optimizer.models.human import Human
 from human_brain_optimizer.models.logger.action import ActionLogger
+from human_brain_optimizer.models.logger.inventory import InventoryLogger
 
 
 class Life:
@@ -14,11 +15,13 @@ class Life:
         self.human = Human(brain_config)
         self.add_extrinsic_actions()
         self.action_logger = ActionLogger()
+        self.inventory_logger = InventoryLogger()
 
     def run(self):
         while self.human.dead is False:
             action, finesse = self.human.turn()
             self.action_logger.log(action_name=action, finesse=finesse)
+            self.inventory_logger.log(len(self.human.inventory))
 
     def add_extrinsic_actions(self):
         self.human.set_external_actions(self.BASE_EXTRINSIC_ACTIONS)

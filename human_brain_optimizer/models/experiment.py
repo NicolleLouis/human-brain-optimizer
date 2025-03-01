@@ -23,5 +23,6 @@ class Experiment:
                 log_value=life.death_cause()
             )
             self.logger.merge_logger('action', life.action_logger)
+            self.logger.merge_logger('inventory', life.inventory_logger)
 
         self.logger.save()
