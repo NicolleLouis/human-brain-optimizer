@@ -65,7 +65,8 @@ class ActionLogger(BaseLogger):
             self.df,
             x='action',
             y='score',
-            title='Score Repartition'
+            title='Score Repartition',
+            points=False
         )
 
         means = self.df.groupby('action')['score'].mean().reset_index()
@@ -94,38 +95,24 @@ class ActionLogger(BaseLogger):
                 yshift=10,
                 font=dict(color="red")
             )
-            fig.add_annotation(
-                x=row['action'],
-                y=row['min_score'],
-                text=f"Min: {row['min_score']}",
-                showarrow=False,
-                yshift=-10,
-                font=dict(color="blue")
-            )
-            fig.add_annotation(
-                x=row['action'],
-                y=row['max_score'],
-                text=f"Max: {row['max_score']}",
-                showarrow=False,
-                yshift=10,
-                font=dict(color="blue")
-            )
-            fig.add_annotation(
-                x=row['action'],
-                y=row['q1'],
-                text=f"Q1: {row['q1']}",
-                showarrow=False,
-                yshift=-10,
-                font=dict(color="green")
-            )
-            fig.add_annotation(
-                x=row['action'],
-                y=row['q3'],
-                text=f"Q3: {row['q3']}",
-                showarrow=False,
-                yshift=10,
-                font=dict(color="green")
-            )
+            if row['min_score'] != row['mean_score']:
+                fig.add_annotation(
+                    x=row['action'],
+                    y=row['min_score'],
+                    text=f"Min: {row['min_score']}",
+                    showarrow=False,
+                    yshift=-10,
+                    font=dict(color="blue")
+                )
+            if row['max_score'] != row['mean_score']:
+                fig.add_annotation(
+                    x=row['action'],
+                    y=row['max_score'],
+                    text=f"Max: {row['max_score']}",
+                    showarrow=False,
+                    yshift=10,
+                    font=dict(color="blue")
+                )
 
         fig.update_layout(xaxis_title="Action", yaxis_title="Score")
 

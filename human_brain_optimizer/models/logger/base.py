@@ -27,8 +27,9 @@ class BaseLogger(ABC):
 
         return str(subdirectory / filename)
 
-    def save_graph(self, chart_name, fig):
-        fig.write_html(self.file_path(f"{chart_name}.html"))
+    def save_graph(self, chart_name, fig, save_html=False):
+        if save_html:
+            fig.write_html(self.file_path(f"{chart_name}.html"))
         fig.write_image(self.file_path(f"{chart_name}.png"))
 
     @abstractmethod

@@ -7,4 +7,5 @@ class RandomBrain(Brain):
         'sleep': RandomSpecificBrain,
         'eat': RandomSpecificBrain,
         'hunt': RandomSpecificBrain,
+        'train': RandomSpecificBrain,
     }

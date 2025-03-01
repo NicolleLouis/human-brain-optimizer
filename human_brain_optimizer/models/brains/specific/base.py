@@ -1,8 +1,6 @@
 import random
 from abc import ABC, abstractmethod
 
-from human_brain_optimizer.models.actions.base import BaseAction
-
 
 class BaseBrain(ABC):
     MAX_FINESSE = 1000

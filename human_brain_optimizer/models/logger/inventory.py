@@ -11,6 +11,7 @@ class InventoryLogger(BaseLogger):
 
     def __init__(self):
         super().__init__()
+        self.total_values = 0
         self.df = None
         self.inventory_dict = {}
 
@@ -19,14 +20,27 @@ class InventoryLogger(BaseLogger):
         self.inventory_dict[inventory_size] += 1
 
     def save_linechart(self):
-        df = pd.DataFrame(list(self.inventory_dict.items()), columns=['Inventory Size', 'Value'])
+        df = pd.DataFrame(list(self.inventory_dict.items()), columns=['Inventory Size', 'Raw Value'])
+        df.sort_values(by='Inventory Size', inplace=True)
+        df['Value'] = df['Raw Value'] / self.total_values
         fig = px.line(df, x='Inventory Size', y='Value', markers=True, title="Inventory Size")
+        fig.update_layout(
+            yaxis=dict(
+                tickformat='.0%',
+            )
+        )
         self.save_graph('size_per_turn', fig)
 
     def save_raw(self):
         json.dump(self.inventory_dict, open(self.file_path('raw.json'), 'w'))
 
+    def compute_total_values(self):
+        self.total_values =  0
+        for value in self.inventory_dict.values():
+            self.total_values += value
+
     def save(self) -> None:
+        self.compute_total_values()
         self.save_raw()
         self.save_linechart()
 

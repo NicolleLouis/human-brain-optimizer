@@ -3,6 +3,7 @@ import random
 from human_brain_optimizer.models.actions.base import BaseAction
 from human_brain_optimizer.models.actions.intrinsic.eat import Eat
 from human_brain_optimizer.models.actions.intrinsic.sleep import Sleep
+from human_brain_optimizer.models.actions.intrinsic.train import Train
 from human_brain_optimizer.models.brains.general.v1 import BrainV1
 from human_brain_optimizer.models.data.brain_config import BrainConfig
 
@@ -13,6 +14,7 @@ class Human:
     INTRINSIC_ACTIONS: list[BaseAction] = [
         Sleep,
         Eat,
+        Train,
     ]
     AGE_LIMIT = 1000
 
@@ -23,6 +25,7 @@ class Human:
         self.dead = False
         self.last_action = None
         self.inventory = []
+        self.dexterity = 0
         self.brain = BrainV1(self)
         self.actions: list[BaseAction] = self.INTRINSIC_ACTIONS.copy()
         if brain_config is not None:
@@ -78,3 +81,6 @@ class Human:
     def set_external_actions(self, external_actions):
         self.actions = self.INTRINSIC_ACTIONS.copy()
         self.actions.extend(external_actions)
+
+    def gain_dexterity(self):
+        self.dexterity += 1

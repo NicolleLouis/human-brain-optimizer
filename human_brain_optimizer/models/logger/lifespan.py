@@ -59,7 +59,6 @@ class LifespanLogger(BaseLogger):
         self.lifespan_df = df
 
     def save_death_cause_chart(self):
-        chart_name = "death_cause"
         df = pd.DataFrame(list(self.death_cause.items()), columns=["Death Cause", "Number"])
         fig = px.pie(
             df,
@@ -67,11 +66,9 @@ class LifespanLogger(BaseLogger):
             names="Death Cause",
             title="Death Cause"
         )
-        fig.write_html(self.file_path(f"{chart_name}.html"))
-        fig.write_image(self.file_path(f"{chart_name}.png"))
+        self.save_graph("death_cause", fig)
 
     def save_cumulative_death_chart(self):
-        chart_name = "cumulative_deaths_chart"
         fig_line = px.line(
             self.lifespan_df,
             x='age',
@@ -80,11 +77,9 @@ class LifespanLogger(BaseLogger):
             labels={'age': 'Age', 'cumulative_deaths': 'Accumulated Number of Dead Specimens'},
             markers=True
         )
-        fig_line.write_html(self.file_path(f"{chart_name}.html"))
-        fig_line.write_image(self.file_path(f"{chart_name}.png"))
+        self.save_graph("cumulative_deaths_chart", fig_line)
 
     def save_probability_death_chart(self):
-        chart_name = "probability_death_chart"
         fig_bar = px.bar(
             self.lifespan_df,
             x='age',
@@ -93,8 +88,7 @@ class LifespanLogger(BaseLogger):
             labels={'age': 'Age', 'death_probability': 'Death Probability'}
         )
         fig_bar.update_yaxes(tickformat='.1%')
-        fig_bar.write_html(self.file_path(f"{chart_name}.html"))
-        fig_bar.write_image(self.file_path(f"{chart_name}.png"))
+        self.save_graph("probability_death_chart", fig_bar)
 
     def save_mathematical_analysis(self):
         analysis = {
@@ -106,14 +100,15 @@ class LifespanLogger(BaseLogger):
     def save_death_cause(self):
         json.dump(self.death_cause, open(self.file_path('death_cause.json'), 'w'))
 
-    def save(self) -> None:
+    def save(self, extensive=False) -> None:
         self.save_raw()
         self.save_death_cause()
         self.enrich_dataframe()
         self.save_cumulative_death_chart()
-        self.save_probability_death_chart()
         self.save_mathematical_analysis()
         self.save_death_cause_chart()
+        if extensive:
+            self.save_probability_death_chart()
 
     def load(self) -> dict:
         return json.load(open(self.file_path('raw.json')))
