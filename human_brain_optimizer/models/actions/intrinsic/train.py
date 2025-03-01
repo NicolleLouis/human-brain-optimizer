@@ -5,7 +5,7 @@ from human_brain_optimizer.models.actions.base import BaseAction
 
 class Train(BaseAction):
     ACTION_NAME = 'train'
-    PROBABILITY = 1/2
+    PROBABILITY = 1/5
 
     @classmethod
     def run(cls, human):

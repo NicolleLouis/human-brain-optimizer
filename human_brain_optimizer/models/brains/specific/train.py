@@ -10,7 +10,7 @@ class TrainBrain(BaseBrain):
         self.flat_amount = self.FLAT_AMOUNT
 
     def finesse(self) -> int:
-        if self.human.dexterity > 20:
+        if self.human.dexterity >= 5:
             return 0
         return self.flat_amount
 

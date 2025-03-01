@@ -6,7 +6,7 @@ from human_brain_optimizer.models.actions.base import BaseAction
 class Hunt(BaseAction):
     ACTION_NAME = 'hunt'
     PROBABILITY = 2/14
-    MAX_DEXTERITY = 20
+    MAX_DEXTERITY = 5
 
     @classmethod
     def run(cls, human):

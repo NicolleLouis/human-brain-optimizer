@@ -1,4 +1,3 @@
-import random
 from abc import ABC, abstractmethod
 
 
@@ -14,11 +13,7 @@ class BaseBrain(ABC):
 
     def score(self):
         score = self.finesse()
-        score = min(self.MAX_FINESSE, score)
-
-        # Adding some chaos to avoid deterministic behaviour
-        score += random.randint(-10, 10)
-        return score
+        return min(self.MAX_FINESSE, score)
 
     @abstractmethod
     def set_config(self, config_type: str, config_value: int):

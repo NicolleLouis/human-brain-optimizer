@@ -6,9 +6,6 @@ Showcase the new action finesse chart
 # Code
 Refacto human stats into a new class?
 
-# Logger
-Add a end of life stats graph
-
 # Death Checks
 Add the fact that raw rabbit can kill if ingested, add the cook action to prevent this (With a risk of food deletion)
 

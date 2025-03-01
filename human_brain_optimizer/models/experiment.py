@@ -3,7 +3,7 @@ from human_brain_optimizer.models.logger.general.base import GlobalLogger
 
 
 class Experiment:
-    LIFE_NUMBER = 10000
+    LIFE_NUMBER = 100
 
     def __init__(self):
         self.logger = GlobalLogger()
