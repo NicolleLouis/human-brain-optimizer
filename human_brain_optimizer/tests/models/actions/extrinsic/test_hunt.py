@@ -23,5 +23,5 @@ def test_sanitize():
     sleep = Hunt()
     try:
         sleep.sanitize()
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         pytest.fail(f"Unexpected exception raised: {e}")

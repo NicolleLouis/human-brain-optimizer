@@ -2,6 +2,7 @@ import pytest
 
 from unittest.mock import MagicMock
 
+from human_brain_optimizer.models.data.brain_config import BrainConfig
 from human_brain_optimizer.models.human import Human
 
 
@@ -69,7 +70,8 @@ def test_choose_action(human):
     human.brain.finesse = MagicMock(
         side_effect=lambda action: {"best_action": 10, "action_1": 5, "action_2": 1}[action]
     )
-    assert human.choose_action() == "best_action"
+    best_action, _score = human.choose_action()
+    assert best_action == "best_action"
 
 def test_turn(human):
     human.turn()
@@ -100,3 +102,17 @@ def test_old_age_death(human):
     human.age = human.AGE_LIMIT + 1
     human.death_check()
     assert human.dead
+
+def test_gain_dexterity(human):
+    human.dexterity = 0
+    human.gain_dexterity()
+    assert human.dexterity == 1
+
+def test_set_config():
+    brain_config = BrainConfig(
+        brain_name='hunt',
+        config_name='flat_amount',
+        value=0
+    )
+    human = Human([brain_config])
+    assert human.brain.get_brain(action_name='hunt').flat_amount == 0

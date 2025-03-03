@@ -1,8 +1,3 @@
-# LogBook
-Day 5 -> The training update. Showcase the fun training graph. Explain the first cases by comparing random brain to skip to trained. 
-Showcase the inventory size evolution with the new stable point
-Showcase the new action finesse chart
-
 # Code
 Refacto human stats into a new class?
 

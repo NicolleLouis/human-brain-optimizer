@@ -14,7 +14,7 @@ def test_sanitize():
     sleep = Eat()
     try:
         sleep.sanitize()
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         pytest.fail(f"Unexpected exception raised: {e}")
 
 def test_with_one_food(human):
