@@ -8,4 +8,4 @@ class RandomSpecificBrain(BaseBrain):
         return random.randint(0, self.MAX_FINESSE)
 
     def set_config(self, config_type: str, config_value: int):
-        pass
+        pass # pragma: no cover
