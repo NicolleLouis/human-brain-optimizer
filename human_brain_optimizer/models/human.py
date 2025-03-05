@@ -28,6 +28,7 @@ class Human:
         self.dexterity = 0
         self.brain = BrainV1(self)
         self.actions: list[BaseAction] = self.INTRINSIC_ACTIONS.copy()
+        self.death_cause = None
         if brain_config is not None:
             self.brain.set_configs(brain_config)
 
@@ -47,10 +48,14 @@ class Human:
         self.energy_level = min(self.energy_level, self.MAXIMUM_INDICATOR_LEVEL)
 
     def turn_consequence(self):
+        from human_brain_optimizer.services.death_cause import DeathCauseService
+
         self.food_level -= 1
         self.energy_level -= 1
         self.age += 1
         self.death_check()
+        if self.dead and self.death_cause is None:
+            self.death_cause = DeathCauseService.get_death_cause(self)
 
     def death_check(self):
         base_death_probability = 0

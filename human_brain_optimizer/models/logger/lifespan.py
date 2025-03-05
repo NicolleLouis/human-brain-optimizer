@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import plotly.express as px
 
+from human_brain_optimizer.constants.death_cause import DeathCause
 from human_brain_optimizer.exceptions.models.logger import LifespanLoggerMessageNotRecognizedException
 from human_brain_optimizer.models.logger.base import BaseLogger
 
@@ -26,12 +27,7 @@ class LifespanLogger(BaseLogger):
             raise LifespanLoggerMessageNotRecognizedException('log_type unknown')
 
     def add_death_cause(self, death_cause: str) -> None:
-        valid_death_cause = [
-            'Energy',
-            'Food & Energy',
-            'Food',
-            'Old age'
-        ]
+        valid_death_cause = [death_cause.value for death_cause in DeathCause]
         if death_cause not in valid_death_cause:
             raise LifespanLoggerMessageNotRecognizedException('death_cause unknown')
 

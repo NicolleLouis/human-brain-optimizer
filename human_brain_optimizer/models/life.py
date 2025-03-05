@@ -36,18 +36,3 @@ class Life:
 
     def add_extrinsic_actions(self):
         self.human.set_external_actions(self.BASE_EXTRINSIC_ACTIONS)
-
-    def death_cause(self):
-        if not self.human.dead:
-            raise HumanNotDead
-
-        if self.human.energy_level <= 0 and self.human.food_level <= 0:
-            return 'Food & Energy'
-        elif self.human.energy_level <= 0:
-            return 'Energy'
-        elif self.human.food_level <= 0:
-            return 'Food'
-        elif self.human.age > Human.AGE_LIMIT:
-            return 'Old age'
-        else:
-            raise UnexpectedDeath
