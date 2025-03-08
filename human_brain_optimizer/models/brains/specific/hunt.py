@@ -1,3 +1,4 @@
+from human_brain_optimizer.constants.food import Food
 from human_brain_optimizer.exceptions.models.brain import UnknownConfigTypeException
 from human_brain_optimizer.models.brains.specific.base import BaseBrain
 
@@ -17,7 +18,7 @@ class HuntBrain(BaseBrain):
         return self.flat_amount + self.ratio_amount * self.rabbit_collected()
 
     def rabbit_collected(self):
-        return self.human.inventory.count('rabbit')
+        return self.human.inventory.count(Food.RAW_FOOD)
 
     def set_config(self, config_type: str, config_value: int):
         if config_type == 'flat_amount':

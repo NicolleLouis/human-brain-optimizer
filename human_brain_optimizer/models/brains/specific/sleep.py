@@ -1,12 +1,11 @@
 from human_brain_optimizer.exceptions.models.brain import UnknownConfigTypeException
-from human_brain_optimizer.models.actions.base import BaseAction
 from human_brain_optimizer.models.brains.specific.base import BaseBrain
 
 
 class SleepBrain(BaseBrain):
     FLAT_AMOUNT = 0
-    RATIO_AMOUNT = 30
-    ALREADY_ASLEEP_BONUS = 450
+    RATIO_AMOUNT = 35
+    ALREADY_ASLEEP_BONUS = 175
 
 
     def __init__(self, human):

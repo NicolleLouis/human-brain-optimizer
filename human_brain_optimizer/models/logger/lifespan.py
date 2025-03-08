@@ -96,8 +96,9 @@ class LifespanLogger(BaseLogger):
     def save_death_cause(self):
         json.dump(self.death_cause, open(self.file_path('death_cause.json'), 'w'))
 
-    def save(self, extensive=False) -> None:
-        self.save_raw()
+    def save(self, extensive=False, raw_values=False) -> None:
+        if raw_values:
+            self.save_raw()
         self.save_death_cause()
         self.enrich_dataframe()
         self.save_cumulative_death_chart()

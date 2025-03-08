@@ -43,16 +43,12 @@ class TrainingResultLogger(BaseLogger):
                 file.write(f"{str(config)}\n")
 
     def save_histogram(self):
-        chart_name = "histogram_repartition"
         fig = px.histogram(self.df, x='values', nbins=20)
-        fig.write_html(self.file_path(f"{chart_name}.html"))
-        fig.write_image(self.file_path(f"{chart_name}.png"))
+        self.save_graph("histogram_repartition", fig)
 
     def save_box_plot(self):
-        chart_name = "boxplot_repartition"
         fig = px.box(self.df, y='values')
-        fig.write_html(self.file_path(f"{chart_name}.html"))
-        fig.write_image(self.file_path(f"{chart_name}.png"))
+        self.save_graph("boxplot_repartition", fig)
 
     def save_all_brain_config_repartition(self):
         example_brain_configs = self.random_brain_configs()
@@ -78,8 +74,7 @@ class TrainingResultLogger(BaseLogger):
             trendline='ols',
             title=chart_name
         )
-        fig.write_html(self.file_path(f"by_config_{chart_name}.html"))
-        fig.write_image(self.file_path(f"by_config_{chart_name}.png"))
+        self.save_graph(chart_name, fig)
 
 
     def random_brain_configs(self):
@@ -91,9 +86,10 @@ class TrainingResultLogger(BaseLogger):
             'values': list(map(int, self.results.values()))
         })
 
-    def save(self) -> None:
+    def save(self, raw_values=False) -> None:
         self.enrich_dataframe()
-        self.save_raw()
+        if raw_values:
+            self.save_raw()
         self.summary()
         self.save_histogram()
         self.save_box_plot()

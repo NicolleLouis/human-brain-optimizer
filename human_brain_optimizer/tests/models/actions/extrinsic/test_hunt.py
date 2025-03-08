@@ -16,7 +16,7 @@ def test_hunt_probability(human):
         if len(human.inventory) > 0:
             successful_hunt_count += 1
         human.inventory = []
-    assert 170 > successful_hunt_count > 100
+    assert 190 > successful_hunt_count > 140
 
 
 def test_sanitize():

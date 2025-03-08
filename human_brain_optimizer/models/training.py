@@ -6,6 +6,7 @@ from human_brain_optimizer.services.brain_config_unpacker import BrainConfigUnpa
 
 class Training:
     LIFE_NUMBER = 10000
+    MAX_TRAINING_CONFIG = 200
 
     def __init__(self, training_config: [BrainConfigRange]):
         self.life_size = None
@@ -15,17 +16,17 @@ class Training:
         self.generate_experiments()
         self.generate_experiment_depth()
 
+    def generate_experiments(self):
+        self.experiments = list(BrainConfigUnpackerService.unpack_ranges(self.training_config))
+
     def run(self):
         for brain_config in self.experiments:
             self.experiment(brain_config)
         self.logger.save(['training'])
 
-    def generate_experiments(self):
-        self.experiments = list(BrainConfigUnpackerService.unpack_ranges(self.training_config))
-
     def generate_experiment_depth(self):
         total_configuration = len(self.experiments)
-        if total_configuration > 100:
+        if total_configuration > self.MAX_TRAINING_CONFIG:
             raise Exception(f"Too Large initial set: {total_configuration} cases")
 
         self.life_size = int(self.LIFE_NUMBER / total_configuration)

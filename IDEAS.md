@@ -1,3 +1,6 @@
+# Logger
+Inventory size per item type
+
 # Code
 Refacto human stats into a new class?
 

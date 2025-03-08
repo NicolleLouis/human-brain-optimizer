@@ -37,15 +37,15 @@ class Human:
         best_action = max(finesse_values, key=finesse_values.get)
         return best_action, finesse_values[best_action]
 
+    def sanitize(self):
+        self.food_level = min(self.food_level, self.MAXIMUM_INDICATOR_LEVEL)
+        self.energy_level = min(self.energy_level, self.MAXIMUM_INDICATOR_LEVEL)
+
     def turn(self):
         action, finesse = self.choose_action()
         action.use(self)
         self.turn_consequence()
         return action.ACTION_NAME, finesse
-
-    def sanitize(self):
-        self.food_level = min(self.food_level, self.MAXIMUM_INDICATOR_LEVEL)
-        self.energy_level = min(self.energy_level, self.MAXIMUM_INDICATOR_LEVEL)
 
     def turn_consequence(self):
         from human_brain_optimizer.services.death_cause import DeathCauseService
@@ -82,6 +82,9 @@ class Human:
 
     def remove_item(self, item):
         self.inventory.remove(item)
+
+    def has_item(self, item):
+        return item in self.inventory
 
     def set_external_actions(self, external_actions):
         self.actions = self.INTRINSIC_ACTIONS.copy()
