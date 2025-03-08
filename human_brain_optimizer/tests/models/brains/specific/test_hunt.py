@@ -8,7 +8,6 @@ from human_brain_optimizer.models.human import Human
 def human():
     return Human()
 
-
 def test_rabbit_collected_case_empty(human):
     assert HuntBrain(human).rabbit_collected() == 0
 

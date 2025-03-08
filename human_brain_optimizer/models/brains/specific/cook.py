@@ -4,9 +4,9 @@ from human_brain_optimizer.models.brains.specific.base import BaseBrain
 
 
 class CookBrain(BaseBrain):
-    FLAT_AMOUNT = 340
-    UNCOOKED_RATIO_AMOUNT = 30
-    COOKED_RATIO_AMOUNT = -20
+    FLAT_AMOUNT = 310
+    UNCOOKED_RATIO_AMOUNT = 24
+    COOKED_RATIO_AMOUNT = -16
 
 
     def __init__(self, human):

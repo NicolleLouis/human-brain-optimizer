@@ -70,9 +70,10 @@ class AbilityLogger(BaseLogger):
 
         self.by_age_df = df
 
-    def save(self) -> None:
+    def save(self, raw_values=False, **kwargs) -> None:
         self.compute_by_age_df()
-        self.save_raw()
+        if raw_values:
+            self.save_raw()
         self.save_end_of_life_line_chart()
         self.save_by_age_line_chart()
 

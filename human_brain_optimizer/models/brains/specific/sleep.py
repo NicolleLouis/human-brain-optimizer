@@ -15,16 +15,13 @@ class SleepBrain(BaseBrain):
         self.already_asleep_bonus = self.ALREADY_ASLEEP_BONUS
 
     def finesse(self) -> int:
-        finesse = self.flat_amount + self.ratio_amount * self.sleepiness()
+        finesse = self.flat_amount + self.ratio_amount * self.human.sleepiness()
         if self.was_sleeping():
             finesse += self.already_asleep_bonus
         return finesse
 
     def was_sleeping(self):
         return self.human.last_action == 'sleep'
-
-    def sleepiness(self):
-        return self.human.MAXIMUM_INDICATOR_LEVEL - self.human.energy_level
 
     def set_config(self, config_type: str, config_value: int):
         if config_type == 'flat_amount':

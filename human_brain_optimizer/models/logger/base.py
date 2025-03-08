@@ -33,7 +33,7 @@ class BaseLogger(ABC):
         fig.write_image(self.file_path(f"{chart_name}.png"))
 
     @abstractmethod
-    def save(self) -> None:
+    def save(self, raw_values=False, extensive=False) -> None:
         pass
 
     @abstractmethod

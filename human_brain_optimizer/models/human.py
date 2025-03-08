@@ -92,3 +92,9 @@ class Human:
 
     def gain_dexterity(self):
         self.dexterity += 1
+
+    def hunger(self):
+        return self.MAXIMUM_INDICATOR_LEVEL - self.food_level
+
+    def sleepiness(self):
+        return self.MAXIMUM_INDICATOR_LEVEL - self.energy_level

@@ -8,6 +8,5 @@ from human_brain_optimizer.models.human import Human
 def human():
     return Human()
 
-
 def test_finesse(human):
     assert 0 < RandomSpecificBrain(human).finesse() < 1000

@@ -4,9 +4,9 @@ from human_brain_optimizer.models.brains.specific.base import BaseBrain
 
 
 class EatBrain(BaseBrain):
-    FLAT_AMOUNT = 370
-    RATIO_AMOUNT = 30
-    UNCOOKED_MALUS = 275
+    FLAT_AMOUNT = 275
+    RATIO_AMOUNT = 29
+    UNCOOKED_MALUS = 200
 
     def __init__(self, human):
         super().__init__(human)
@@ -18,14 +18,11 @@ class EatBrain(BaseBrain):
         if not self.has_food():
             return 0
         score = self.flat_amount
-        score += self.ratio_amount * self.hunger()
+        score += self.ratio_amount * self.human.hunger()
         if not self.has_cooked_food():
             score -= self.uncooked_malus
 
         return score
-
-    def hunger(self):
-        return self.human.MAXIMUM_INDICATOR_LEVEL - self.human.food_level
 
     def has_food(self):
         return self.human.has_item(Food.RAW_FOOD) or self.human.has_item(Food.COOKED_FOOD)
