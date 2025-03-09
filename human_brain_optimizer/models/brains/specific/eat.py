@@ -5,8 +5,8 @@ from human_brain_optimizer.models.brains.specific.base import BaseBrain
 
 class EatBrain(BaseBrain):
     FLAT_AMOUNT = 275
-    RATIO_AMOUNT = 29
-    UNCOOKED_MALUS = 200
+    RATIO_AMOUNT = 33
+    UNCOOKED_MALUS = 150
 
     def __init__(self, human):
         super().__init__(human)

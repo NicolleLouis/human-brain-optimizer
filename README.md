@@ -15,3 +15,6 @@ Trained the HuntBrain, added donut chart visualisation. [Details](log_book/day_4
 
 ## Day 5
 The Training Update, improved lots of graphs. [Details](log_book/day_5/details.md)
+
+## Day 6
+Made raw food dangerous, added the cook option. [Details](log_book/day_6/details.md)
