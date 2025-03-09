@@ -43,9 +43,9 @@ class Human:
 
     def turn(self):
         action, finesse = self.choose_action()
-        action.use(self)
+        log_requests = action.use(self)
         self.turn_consequence()
-        return action.ACTION_NAME, finesse
+        return action.ACTION_NAME, finesse, log_requests
 
     def turn_consequence(self):
         from human_brain_optimizer.services.death_cause import DeathCauseService

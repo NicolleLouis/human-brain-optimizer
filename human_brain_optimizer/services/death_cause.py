@@ -1,5 +1,5 @@
 from human_brain_optimizer.constants.death_cause import DeathCause
-from human_brain_optimizer.exceptions.life import HumanNotDead, UnexpectedDeath
+from human_brain_optimizer.exceptions.models.life import HumanNotDead, UnexpectedDeath
 from human_brain_optimizer.models.human import Human
 
 

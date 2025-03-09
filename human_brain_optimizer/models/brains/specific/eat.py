@@ -17,6 +17,8 @@ class EatBrain(BaseBrain):
     def finesse(self) -> int:
         if not self.has_food():
             return 0
+        if self.human.hunger() < 12:
+            return 0
         score = self.flat_amount
         score += self.ratio_amount * self.human.hunger()
         if not self.has_cooked_food():

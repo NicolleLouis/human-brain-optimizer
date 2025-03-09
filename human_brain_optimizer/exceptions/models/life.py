@@ -3,3 +3,6 @@ class HumanNotDead(Exception):
 
 class UnexpectedDeath(Exception):
     pass
+
+class LoggerNotFound(Exception):
+    pass

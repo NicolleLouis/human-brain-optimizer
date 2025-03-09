@@ -15,8 +15,8 @@ class BaseAction(ABC):
 
     @classmethod
     def use(cls, human):
-        cls.run(human)
         human.last_action = cls.ACTION_NAME
+        return cls.run(human)
 
     @staticmethod
     @abstractmethod
